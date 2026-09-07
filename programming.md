@@ -14,6 +14,9 @@ var a = 1;
 ```
 ● a ← 1;
 ```
+```
+:v a <- 1;
+```
 
 ---------------------------
 Const declaration
@@ -23,6 +26,9 @@ const black = 0;
 ```
 ```
 ■ black ← 0;
+```
+```
+:c black <- 0;
 ```
 
 ---------------------------
@@ -51,6 +57,9 @@ read(a)
 ```
 ↑(a);
 ```
+```
+:i(a);
+```
 
 ---------------------------
 Output
@@ -59,6 +68,88 @@ write("sum: " + 1 + 2);
 ```
 ```
 ↓("sum: {}", 1 + 2);
+```
+```
+:o("sum: {}", 1 + 2);
+```
+
+---------------------------
+Array declaration
+```
+var c = array[1,2,3,4,5];
+```
+```
+● c ← 1..5;
+```
+```
+:v c <- 1..5;
+```
+
+---------------------------
+Array map declaration
+```
+var c = array[1,2,3,4,5].map(a => a - 5)
+```
+```
+● c ← - 5 \\ 1..5;
+```
+```
+:v <- - 5 \\ 1..5;
+```
+
+---------------------------
+Array reduce declaration
+```
+var c = array[1,2,3,4,5].reduce((acc, curr) => acc + curr)
+```
+```
+● c ← + \ 1..5;
+```
+```
+:v c <- + \ 1..5;
+```
+
+```
++\ summatory
+-\ subtraction
+*\ multiplication
+/\ division
+!\ factorial
+```
+
+---------------------------
+Array find
+```
+var current = [1,2,3,4,5].find(a => a == 1);
+```
+```
+● current ← ? ( a = 1 ) \ 1..5;
+```
+```
+:v current <- ? ( a = 1 ) \ 1..5;
+```
+---
+
+```
+var current = [1,2,3,4,5].find(a => a / 5 == 1)
+```
+```
+● current ← ? ( a / 5 = 1 ) \ 1..5;
+```
+```
+:v current <- ? ( a / 5 = 1 ) \ 1..5;
+```
+
+---------------------------
+Array items
+```
+var current = a[5];
+```
+```
+● current ← a[5];
+```
+```
+:v current <- a[5];
 ```
 
 ---------------------------
@@ -78,6 +169,51 @@ for c = 1 to 5 {
   ↓(c);
 ;
 ```
+```
+:v c <- 1..5
+  ? ( c = 2 / 5 ) { -> };
+  :o(c);
+;
+```
+
+---------------------------
+For loop items declaration
+```
+const object = {
+  a: 1,
+  b: 2,
+};
+for (const item in object) {
+  write(item.a, item.b);
+}
+for (const (a, b) in object) {
+  write(a, b);
+}
+```
+```
+■ object ← {
+  a ← 1;
+  b ← 2;
+};
+● item ← 1..object
+  ↓("{} {}", item.a, item.b);
+;
+● (a, b) ← 1..object
+  ↓("{} {}", a, b);
+;
+```
+```
+:c object <- {
+  a <- 1;
+  b <- 2;
+};
+:v item <- 1..object
+  :o("{} {}", item.a, item.b);
+;
+:v (a, b) <- 1..object
+  :o("{} {}", a, b);
+;
+```
 
 ---------------------------
 While loop declaration
@@ -90,82 +226,22 @@ while c < 4 {
 }
 ```
 ```
-● c ← 1..? ( 2 = 3 )
-  ? c >= 4 { → };
+● c ← 1;
+? c < 4 {
+  c ← c + 1;
   ↓(c);
-;
-```
-
----------------------------
-Array declaration
-```
-var c = array[1,2,3,4,5];
+} ↻;
 ```
 ```
-● c ← 1..5;
-```
-
----------------------------
-Array map declaration
-```
-var c = array[1,2,3,4,5].map(a => a - 5)
-```
-```
-● c ← - 5 \\ 1..5;
-```
-
----------------------------
-Array reduce declaration
-```
-var c = array[1,2,3,4,5].reduce((acc, curr) => acc + curr)
-```
-```
-● c ← + \ 1..5;
-```
-```
-+\ summatory
--\ subtraction
-*\ multiplication
-/\ division
-!\ factorial
-```
-
----------------------------
-Array find
-```
-var current = [1,2,3,4,5].find(a => a == 1);
-```
-```
-● current ← ? ( a = 1 ) \ 1..5;
-```
-
-```
-var current = [1,2,3,4,5].find(a => a / 5 == 1)
-```
-```
-● current ← ? ( a / 5 = 1 ) \ 1..5;
-```
-
----------------------------
-Array items
-```
-var current = a[5];
-```
-```
-● current ← a[5];
+:v c <- 1;
+? c < 4 {
+  c <- c + 1;
+  :o(c);
+} :r;
 ```
 
 ---------------------------
 Run commands
-```
-command("ls -a");
-```
-```
-$ls -a;
-```
-
----------------------------
-Write into files
 ```
 "hi" >> file.txt
 ```
@@ -199,6 +275,11 @@ if ([1,2,3,4,5].includes(5)) {
   ↓(true);
 };
 ```
+```
+? 5 :e 1..5 {
+  :o(true);
+};
+```
 
 ---------------------------
 Functions
@@ -213,6 +294,11 @@ function summatory(a, b){
   ← a + b;
 };
 ```
+```
+:f summatory ( a, b ) {
+  <- a + b;
+};
+```
 
 ---------------------------
 Include/import
@@ -223,11 +309,23 @@ import {summatory as sum} from "./module.rama";
 ++ ■ sum ← summatory :: "./module.rama";
 ```
 ```
+++ :c sum <- summatory :: "./module.rama";
+```
+
+---
+
+```
 import {summatory} from "./module.rama";
 ```
 ```
 ++ ■ summatory :: "./module.rama";
 ```
+```
+++ :c summatory :: "./module.rama";
+```
+
+---
+
 ```
 import "./module.rama";
 ```
@@ -247,6 +345,30 @@ pub fn convert(a){
   ← a * 8;
 };
 ```
+```
+:p :f convert ( a ) {
+  <- a * 8;
+};
+```
+
+---------------------------
+Async
+> two arrows splitting each one in a different direction
+```
+async function getList() {
+  write(1);
+}
+```
+```
+⤨ ƒ get_list() {
+  ↓(1);
+};
+```
+```
+:a :f get_list() {
+  :o(1);
+};
+```
 
 ---------------------------
 Null/isEmpty
@@ -255,4 +377,24 @@ if(arr.length == 0) {}
 ```
 ```
 ? arr = ∅ {};
+```
+```
+? arr = :n {};
+```
+
+---------------------------
+Characters
+```
+●  -> :v
+■  -> :c
+←  -> <-
+→  -> ->
+↑  -> :i
+↓  -> :o
+∈  -> :e
+∅  -> :n
+ƒ  -> :f
+∀  -> :p
+↻  -> :r
+⤨  -> :a
 ```
