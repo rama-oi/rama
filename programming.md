@@ -1,6 +1,23 @@
 The idea behind this language is that is separated from any spoken language, so no reserved words for it.
 
 ---------------------------
+Characters
+```
+● = :v = variable
+■ = :c = constant
+← = <- = assignment
+→ = -> = break/move_forward
+↑ = :i = input
+↓ = :o = output
+∈ = :e = element_of
+∅ = :n = null/empty
+ƒ = :f = function
+∀ = :p = pub
+↻ = :r = repeat
+⤨ = :a = async
+```
+
+---------------------------
 End statement
 ```
 ;
@@ -380,21 +397,4 @@ if(arr.length == 0) {}
 ```
 ```
 ? arr = :n {};
-```
-
----------------------------
-Characters
-```
-●  -> :v
-■  -> :c
-←  -> <-
-→  -> ->
-↑  -> :i
-↓  -> :o
-∈  -> :e
-∅  -> :n
-ƒ  -> :f
-∀  -> :p
-↻  -> :r
-⤨  -> :a
 ```
