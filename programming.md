@@ -7,20 +7,22 @@ End statement
 ```
 ---------------------------
 Variable declaration
+> the circle represent how this is dynamic
 ```
 var a = 1;
 ```
 ```
-●a ← 1;
+● a ← 1;
 ```
 
 ---------------------------
 Const declaration
+> the square represent how is supossed to be static
 ```
 const black = 0;
 ```
 ```
-■black ← 0;
+■ black ← 0;
 ```
 
 ---------------------------
@@ -61,6 +63,7 @@ write("sum: " + 1 + 2);
 
 ---------------------------
 For loop declaration
+> the break is an arrow indicating to move forward
 ```
 for c = 1 to 5 {
   if(c == 2 / 5){
@@ -70,7 +73,7 @@ for c = 1 to 5 {
 }
 ```
 ```
-●c ← 1..5
+● c ← 1..5
   ? ( c = 2 / 5 ) { → };
   ↓(c);
 ;
@@ -87,7 +90,7 @@ while c < 4 {
 }
 ```
 ```
-●c ← 1..? ( 2 = 3 )
+● c ← 1..? ( 2 = 3 )
   ? c >= 4 { → };
   ↓(c);
 ;
@@ -99,7 +102,7 @@ Array declaration
 var c = array[1,2,3,4,5];
 ```
 ```
-●c ← 1..5;
+● c ← 1..5;
 ```
 
 ---------------------------
@@ -108,7 +111,7 @@ Array map declaration
 var c = array[1,2,3,4,5].map(a => a - 5)
 ```
 ```
-●c ← - 5 \ 1..5;
+● c ← - 5 \\ 1..5;
 ```
 
 ---------------------------
@@ -117,7 +120,7 @@ Array reduce declaration
 var c = array[1,2,3,4,5].reduce((acc, curr) => acc + curr)
 ```
 ```
-●c ← + \ 1..5;
+● c ← + \ 1..5;
 ```
 ```
 +\ summatory
@@ -133,14 +136,14 @@ Array find
 var current = [1,2,3,4,5].find(a => a == 1);
 ```
 ```
-●current ← ? a = 1 \ 1..5;
+● current ← ? ( a = 1 ) \ 1..5;
 ```
 
 ```
 var current = [1,2,3,4,5].find(a => a / 5 == 1)
 ```
 ```
-●current ← ? a / 5 = 1 \ 1..5;
+● current ← ? ( a / 5 = 1 ) \ 1..5;
 ```
 
 ---------------------------
@@ -149,7 +152,7 @@ Array items
 var current = a[5];
 ```
 ```
-●current ← a[5];
+● current ← a[5];
 ```
 
 ---------------------------
@@ -184,4 +187,72 @@ hi
 ;
 ```
 
-∈
+---------------------------
+Array includes
+```
+if ([1,2,3,4,5].includes(5)) {
+  write(true)
+}
+```
+```
+? 5 ∈ 1..5 {
+  ↓(true);
+};
+```
+
+---------------------------
+Functions
+> the return is a value that is assign back to the function
+```
+function summatory(a, b){
+  return a + b
+}
+```
+```
+ƒ summatory ( a, b ) {
+  ← a + b;
+};
+```
+
+---------------------------
+Include/import
+```
+import {summatory as sum} from "./module.rama";
+```
+```
+++ ■ sum ← summatory :: "./module.rama";
+```
+```
+import {summatory} from "./module.rama";
+```
+```
+++ ■ summatory :: "./module.rama";
+```
+```
+import "./module.rama";
+```
+```
+++ "./module.rama";
+```
+
+---------------------------
+Export/Public
+```
+pub fn convert(a){
+  return a*8;
+}
+```
+```
+∀ ƒ convert ( a ) {
+  ← a * 8;
+};
+```
+
+---------------------------
+Null/isEmpty
+```
+if(arr.length == 0) {}
+```
+```
+? arr = ∅ {};
+```
